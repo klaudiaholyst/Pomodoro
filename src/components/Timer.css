@@ -1,0 +1,56 @@
+.section {
+  min-height: 100vh;
+  transition: background-color 1s linear;
+}
+.section.red {
+  background-color: rgb(217, 85, 80);
+}
+.section.blue {
+  background-color: rgb(69, 124, 163);
+}
+.section.green {
+  background-color: rgb(76, 145, 149);
+}
+
+.timer {
+  margin: 0 auto;
+  max-width: 480px;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.container {
+  display: flex;
+  justify-content: center;
+}
+.button {
+  padding: 2px 12px;
+  background-color: transparent;
+  color: white;
+  border: none;
+}
+
+.button.is-active {
+  background-color: rgba(0, 0, 0, 0.15);
+  color: white;
+  font-weight: bold;
+}
+.button.start {
+  width: 200px;
+  background-color: white;
+  font-weight: bold;
+  font-size: 22px;
+  letter-spacing: 2.5px;
+}
+
+.button.start.red {
+  color: rgb(217, 85, 80);
+}
+.button.start.blue {
+  color: rgb(69, 124, 163);
+}
+.button.start.green {
+  color: rgb(76, 145, 149);
+}
+.time {
+  font-size: 120px;
+  color: white;
+}
