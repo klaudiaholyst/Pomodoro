@@ -38,8 +38,12 @@ const Timer = () => {
   const [mode, setMode] = useState(pomodoro);
   const [donePomodoros, setDonePomodoros] = useState<number>(0);
 
+  const [sound] = useState(new Audio("/clickSound.wav"));
+  const [playing, setPlaying] = useState(false);
+
   const handleButton: React.MouseEventHandler = () => {
     setIsCounting(!isCounting);
+    setPlaying(true);
   };
 
   const handleMode = (mode: ModeInterface) => {
@@ -70,8 +74,27 @@ const Timer = () => {
     }
   }, [isCounting, seconds, minutes]);
 
+  useEffect(() => {
+    sound.addEventListener("ended", () => setPlaying(false));
+    return () => {
+      sound.removeEventListener("ended", () => setPlaying(false));
+    };
+  }, []);
+
+  useEffect(() => {
+    playing && sound.play();
+  }, [playing]);
+
   return (
     <div className={`section ${mode.color}`}>
+      <div className="containerWide">
+        <progress
+          className="progressBar"
+          value={mode.duration * 60 - (minutes * 60 + seconds)}
+          max={mode.duration * 60}
+        ></progress>
+      </div>
+
       <div className="timer box">
         <div className="container">
           <button
