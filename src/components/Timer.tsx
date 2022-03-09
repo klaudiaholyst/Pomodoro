@@ -7,8 +7,6 @@ enum ModeType {
   LONG_BREAK = "long_break",
 }
 
-type ModeTypes = ModeType.POMODORO | ModeType.SHORT_BREAK | ModeType.LONG_BREAK;
-
 interface ModeInterface {
   type: ModeType;
   duration: number;
@@ -30,7 +28,11 @@ const longBreak = {
   color: "blue",
 };
 
-const Timer = () => {
+interface TimerProps {
+  modeColor: (color: string) => void;
+}
+
+const Timer = (props: TimerProps) => {
   const [minutes, setMinutes] = useState<number>(pomodoro.duration);
   const [seconds, setSeconds] = useState<number>(0);
   const [isCounting, setIsCounting] = useState(false);
@@ -51,6 +53,7 @@ const Timer = () => {
     setMode(mode);
     setMinutes(mode.duration);
     setSeconds(0);
+    props.modeColor(mode.color);
   };
 
   useEffect(() => {
@@ -86,7 +89,7 @@ const Timer = () => {
   }, [playing]);
 
   return (
-    <div className={`section ${mode.color}`}>
+    <>
       <div className="containerWide">
         <progress
           className="progressBar"
@@ -132,7 +135,7 @@ const Timer = () => {
           </button>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 export default Timer;

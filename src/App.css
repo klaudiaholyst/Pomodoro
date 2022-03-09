@@ -1,0 +1,21 @@
+.App {
+  min-height: 100vh;
+  transition: background-color 1s linear;
+}
+
+.App.red {
+  background-color: rgb(217, 85, 80);
+}
+
+.App.blue {
+  background-color: rgb(69, 124, 163);
+}
+
+.App.green {
+  background-color: rgb(76, 145, 149);
+}
+
+.containerWide {
+  max-width: 620px;
+  margin: auto;
+}
