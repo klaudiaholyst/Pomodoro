@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Modal from "./Modal";
 import "./Timer.css";
 
 enum ModeType {
@@ -43,19 +44,32 @@ const Timer = (props: TimerProps) => {
   const [sound] = useState(new Audio("/clickSound.wav"));
   const [playing, setPlaying] = useState(false);
 
-  const handleButton: React.MouseEventHandler = () => {
+  const [isModalActive, setIsModalActive] = useState(false);
+  const [newMode, setNewMode] = useState<ModeInterface>(pomodoro);
+
+  const handleStartStopButton: React.MouseEventHandler = () => {
     setIsCounting(!isCounting);
     setPlaying(true);
   };
-
-  const handleMode = (mode: ModeInterface) => {
-    setIsCounting(false);
+  const showNewMode = (mode: ModeInterface) => {
     setMode(mode);
     setMinutes(mode.duration);
     setSeconds(0);
     props.modeColor(mode.color);
   };
+  const handleMode = (mode: ModeInterface) => {
+    if (isCounting) {
+      setNewMode(mode);
+      setIsModalActive(true);
+    } else {
+      showNewMode(mode);
+    }
+  };
 
+  const handleSwitchMode = (mode: ModeInterface) => {
+    setIsCounting(false);
+    showNewMode(mode);
+  };
   useEffect(() => {
     if (isCounting) {
       const timer = setInterval(() => {
@@ -129,12 +143,17 @@ const Timer = (props: TimerProps) => {
         <div className="container">
           <button
             className={`button start ${mode.color}`}
-            onClick={handleButton}
+            onClick={handleStartStopButton}
           >
             {!isCounting ? "START" : "STOP"}
           </button>
         </div>
       </div>
+      <Modal
+        isActive={isModalActive}
+        setInactive={() => setIsModalActive(false)}
+        switchMode={() => handleSwitchMode(newMode)}
+      />
     </>
   );
 };
