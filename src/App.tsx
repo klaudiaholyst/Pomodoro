@@ -23,13 +23,12 @@ function App() {
     color: "green",
   });
   const [longBreak, setLongBreak] = useState({
-    type: ModeType.POMODORO,
+    type: ModeType.LONG_BREAK,
     duration: 15,
     color: "blue",
   });
   const [color, setColor] = useState("red");
   const [settingsActive, setSettingsActive] = useState(false);
-  console.log(pomodoro);
   return (
     <div className={`App ${color}`}>
       <Header setSettingsActive={() => setSettingsActive(!settingsActive)} />

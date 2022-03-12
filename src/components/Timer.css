@@ -47,3 +47,7 @@
   font-size: 120px;
   color: white;
 }
+.info {
+  color: #3b1919a1;
+  border: ridge 1px #00000047;
+}

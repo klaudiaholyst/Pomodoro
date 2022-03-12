@@ -25,7 +25,6 @@ const Timer = (props: TimerProps) => {
   const [minutes, setMinutes] = useState<number>(props.pomodoro.duration);
   const [seconds, setSeconds] = useState<number>(0);
   const [isCounting, setIsCounting] = useState(false);
-  const [finishedCounting, setFinishedCounting] = useState(false);
   const [mode, setMode] = useState(props.pomodoro);
   const [donePomodoros, setDonePomodoros] = useState<number>(0);
 
@@ -37,7 +36,11 @@ const Timer = (props: TimerProps) => {
 
   useEffect(() => {
     showNewMode(props.pomodoro);
-  }, [props.pomodoro, props.longBreak, props.shortBreak]);
+  }, [
+    props.pomodoro.duration,
+    props.longBreak.duration,
+    props.shortBreak.duration,
+  ]);
 
   const handleStartStopButton: React.MouseEventHandler = () => {
     setIsCounting(!isCounting);
@@ -73,15 +76,25 @@ const Timer = (props: TimerProps) => {
         } else {
           clearInterval(timer);
           setIsCounting(false);
-          setFinishedCounting(true);
-          mode.type === ModeType.POMODORO &&
+          if (
+            mode.type === ModeType.LONG_BREAK ||
+            mode.type === ModeType.SHORT_BREAK
+          ) {
+            handleSwitchMode(props.pomodoro);
+          } else if (mode.type === ModeType.POMODORO) {
             setDonePomodoros(donePomodoros + 1);
+            if ((donePomodoros + 1) % 4 === 0) {
+              handleSwitchMode(props.longBreak);
+            } else {
+              handleSwitchMode(props.shortBreak);
+            }
+          }
         }
       }, 1000);
 
       return () => clearInterval(timer);
     }
-  }, [isCounting, seconds, minutes]);
+  }, [isCounting, seconds, minutes, mode]);
 
   useEffect(() => {
     sound.addEventListener("ended", () => setPlaying(false));
@@ -93,12 +106,7 @@ const Timer = (props: TimerProps) => {
   useEffect(() => {
     playing && sound.play();
   }, [playing]);
-  console.log(
-    "props.pomodoro.duration",
-    props.pomodoro.duration,
-    "minutes",
-    minutes
-  );
+
   return (
     <>
       <div className="containerWide">
@@ -145,6 +153,12 @@ const Timer = (props: TimerProps) => {
             {!isCounting ? "START" : "STOP"}
           </button>
         </div>
+      </div>
+      <div className="timer info box content">
+        <p>
+          Pomodoros done: {donePomodoros}
+          {donePomodoros === 0 && ". Focus with first Pomodoro!"}
+        </p>
       </div>
       <Modal
         isActive={isModalActive}
