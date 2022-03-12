@@ -13,39 +13,31 @@ interface ModeInterface {
   duration: number;
   color: string;
 }
-const pomodoro = {
-  type: ModeType.POMODORO,
-  duration: 15,
-  color: "red",
-};
-const shortBreak = {
-  type: ModeType.SHORT_BREAK,
-  duration: 5,
-  color: "green",
-};
-const longBreak = {
-  type: ModeType.POMODORO,
-  duration: 15,
-  color: "blue",
-};
 
 interface TimerProps {
   modeColor: (color: string) => void;
+  pomodoro: ModeInterface;
+  shortBreak: ModeInterface;
+  longBreak: ModeInterface;
 }
 
 const Timer = (props: TimerProps) => {
-  const [minutes, setMinutes] = useState<number>(pomodoro.duration);
+  const [minutes, setMinutes] = useState<number>(props.pomodoro.duration);
   const [seconds, setSeconds] = useState<number>(0);
   const [isCounting, setIsCounting] = useState(false);
   const [finishedCounting, setFinishedCounting] = useState(false);
-  const [mode, setMode] = useState(pomodoro);
+  const [mode, setMode] = useState(props.pomodoro);
   const [donePomodoros, setDonePomodoros] = useState<number>(0);
 
   const [sound] = useState(new Audio("/clickSound.wav"));
   const [playing, setPlaying] = useState(false);
 
   const [isModalActive, setIsModalActive] = useState(false);
-  const [newMode, setNewMode] = useState<ModeInterface>(pomodoro);
+  const [newMode, setNewMode] = useState<ModeInterface>(props.pomodoro);
+
+  useEffect(() => {
+    showNewMode(props.pomodoro);
+  }, [props.pomodoro, props.longBreak, props.shortBreak]);
 
   const handleStartStopButton: React.MouseEventHandler = () => {
     setIsCounting(!isCounting);
@@ -101,7 +93,12 @@ const Timer = (props: TimerProps) => {
   useEffect(() => {
     playing && sound.play();
   }, [playing]);
-
+  console.log(
+    "props.pomodoro.duration",
+    props.pomodoro.duration,
+    "minutes",
+    minutes
+  );
   return (
     <>
       <div className="containerWide">
@@ -115,20 +112,20 @@ const Timer = (props: TimerProps) => {
       <div className="timer box">
         <div className="container">
           <button
-            className={`button  ${mode === pomodoro && "is-active"}`}
-            onClick={() => handleMode(pomodoro)}
+            className={`button  ${mode === props.pomodoro && "is-active"}`}
+            onClick={() => handleMode(props.pomodoro)}
           >
             Pomodoro
           </button>
           <button
-            className={`button  ${mode === shortBreak && "is-active"}`}
-            onClick={() => handleMode(shortBreak)}
+            className={`button  ${mode === props.shortBreak && "is-active"}`}
+            onClick={() => handleMode(props.shortBreak)}
           >
             Short Break
           </button>
           <button
-            className={`button  ${mode === longBreak && "is-active"}`}
-            onClick={() => handleMode(longBreak)}
+            className={`button  ${mode === props.longBreak && "is-active"}`}
+            onClick={() => handleMode(props.longBreak)}
           >
             Long Break
           </button>

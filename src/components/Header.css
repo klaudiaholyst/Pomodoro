@@ -1,3 +1,9 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
 .h1 {
   padding-top: 30px;
   color: white;
@@ -5,6 +11,11 @@
   font-weight: bold;
 }
 
-.icon {
+.headerIcon {
   padding-right: 10px;
+}
+
+.button--settings {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
 }
