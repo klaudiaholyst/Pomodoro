@@ -19,3 +19,7 @@
   max-width: 620px;
   margin: auto;
 }
+.containerNarrow {
+  max-width: 480px;
+  margin: auto;
+}

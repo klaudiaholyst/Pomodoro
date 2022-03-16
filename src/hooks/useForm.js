@@ -13,7 +13,7 @@ const useForm = (values) => {
       event.target.type === "number"
         ? Number(event.target.value)
         : event.target.value;
-    setInputs({ ...inputs, [event.target.name]: newValue });
+    setInputs((prevState) => ({ ...prevState, [event.target.name]: newValue }));
   };
   return {
     handleSubmit,

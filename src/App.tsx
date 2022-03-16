@@ -4,6 +4,7 @@ import "bulma/css/bulma.min.css";
 import Timer from "./components/Timer";
 import Header from "./components/Header";
 import Settings from "./components/Settings";
+import Tasks from "./components/Tasks";
 
 enum ModeType {
   POMODORO = "pomodoro",
@@ -29,9 +30,26 @@ function App() {
   });
   const [color, setColor] = useState("red");
   const [settingsActive, setSettingsActive] = useState(false);
+
+  const [tasks, setTasks] = useState([
+    {
+      id: "abc",
+      name: "Prepare for Math exam",
+      isDone: false,
+      inProgressNow: true,
+    },
+    {
+      id: "abcde",
+      name: "Prepare for Math exam on Wednesday",
+      isDone: false,
+      inProgressNow: false,
+    },
+  ]);
   return (
     <div className={`App ${color}`}>
-      <Header setSettingsActive={() => setSettingsActive(!settingsActive)} />
+      <Header
+        setSettingsActive={() => setSettingsActive((prevState) => !prevState)}
+      />
       <Timer
         modeColor={(color) => setColor(color)}
         pomodoro={pomodoro}
@@ -45,20 +63,21 @@ function App() {
         shortBreakMinutes={shortBreak.duration}
         closeSettings={() => setSettingsActive(false)}
         changeModesDuration={(values) => {
-          setPomodoro((pomodoro) => ({
-            ...pomodoro,
+          setPomodoro((prevState) => ({
+            ...prevState,
             duration: values.pomodoro,
           }));
-          setShortBreak((shortBreak) => ({
-            ...shortBreak,
+          setShortBreak((prevState) => ({
+            ...prevState,
             duration: values.shortBreak,
           }));
-          setLongBreak((longBreak) => ({
-            ...longBreak,
+          setLongBreak((prevState) => ({
+            ...prevState,
             duration: values.longBreak,
           }));
         }}
       />
+      <Tasks initialTodos={tasks} />
     </div>
   );
 }

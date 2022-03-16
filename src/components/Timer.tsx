@@ -43,15 +43,17 @@ const Timer = (props: TimerProps) => {
   ]);
 
   const handleStartStopButton: React.MouseEventHandler = () => {
-    setIsCounting(!isCounting);
+    setIsCounting((currIsCounting) => !currIsCounting);
     setPlaying(true);
   };
+
   const showNewMode = (mode: ModeInterface) => {
     setMode(mode);
     setMinutes(mode.duration);
     setSeconds(0);
     props.modeColor(mode.color);
   };
+
   const handleMode = (mode: ModeInterface) => {
     if (isCounting) {
       setNewMode(mode);
@@ -65,13 +67,14 @@ const Timer = (props: TimerProps) => {
     setIsCounting(false);
     showNewMode(mode);
   };
+
   useEffect(() => {
     if (isCounting) {
       const timer = setInterval(() => {
         if (seconds > 0) {
-          setSeconds(seconds - 1);
+          setSeconds((currSeconds) => currSeconds - 1);
         } else if (minutes > 0) {
-          setMinutes(minutes - 1);
+          setMinutes((currMinutes) => currMinutes - 1);
           setSeconds(59);
         } else {
           clearInterval(timer);
@@ -82,7 +85,7 @@ const Timer = (props: TimerProps) => {
           ) {
             handleSwitchMode(props.pomodoro);
           } else if (mode.type === ModeType.POMODORO) {
-            setDonePomodoros(donePomodoros + 1);
+            setDonePomodoros((currDonePomodoros) => currDonePomodoros + 1);
             if ((donePomodoros + 1) % 4 === 0) {
               handleSwitchMode(props.longBreak);
             } else {
@@ -120,19 +123,25 @@ const Timer = (props: TimerProps) => {
       <div className="timer box">
         <div className="container">
           <button
-            className={`button  ${mode === props.pomodoro && "is-active"}`}
+            className={`button button--timer  ${
+              mode === props.pomodoro && "is-active"
+            }`}
             onClick={() => handleMode(props.pomodoro)}
           >
             Pomodoro
           </button>
           <button
-            className={`button  ${mode === props.shortBreak && "is-active"}`}
+            className={`button button--timer  ${
+              mode === props.shortBreak && "is-active"
+            }`}
             onClick={() => handleMode(props.shortBreak)}
           >
             Short Break
           </button>
           <button
-            className={`button  ${mode === props.longBreak && "is-active"}`}
+            className={`button button--timer  ${
+              mode === props.longBreak && "is-active"
+            }`}
             onClick={() => handleMode(props.longBreak)}
           >
             Long Break
@@ -147,7 +156,7 @@ const Timer = (props: TimerProps) => {
         </div>
         <div className="container">
           <button
-            className={`button start ${mode.color}`}
+            className={`button button--timer start ${mode.color}`}
             onClick={handleStartStopButton}
           >
             {!isCounting ? "START" : "STOP"}
