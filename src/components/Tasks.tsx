@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import NewTask from "./NewTask";
 
 interface Todo {
   id: string;
@@ -28,7 +29,10 @@ const Tasks = ({ initialTodos }: TasksProps) => {
         {todos.map((todo) => (
           <li
             key={todo.id}
-            className={`box is-fullwidth li ${todo.inProgressNow && "active"}`}
+            className={`box is-fullwidth li ${
+              todo.id === selectedTodoId && "active"
+            }`}
+            onClick={() => setSelectedTodoId(todo.id)}
           >
             <div className="taskDetails">
               <FontAwesomeIcon icon={faCircleCheck} className="taskIcon" />
@@ -47,6 +51,7 @@ const Tasks = ({ initialTodos }: TasksProps) => {
         <FontAwesomeIcon icon={faCirclePlus} className="taskIcon" />
         Add new task
       </button>
+      <NewTask />
     </div>
   );
 };
