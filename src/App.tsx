@@ -35,12 +35,16 @@ function App() {
     {
       id: "abc",
       name: "Prepare for Math exam",
+      pomodoroAmount: 4,
+      pomodorosDone: 2,
       isDone: false,
       inProgressNow: true,
     },
     {
       id: "abcde",
       name: "Prepare for Math exam on Wednesday",
+      pomodoroAmount: 3,
+      pomodorosDone: 0,
       isDone: false,
       inProgressNow: false,
     },

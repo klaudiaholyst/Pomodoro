@@ -9,7 +9,8 @@ import NewTask from "./NewTask";
 interface Todo {
   id: string;
   name: string;
-  isDone: boolean;
+  pomodoroAmount: number;
+  pomodorosDone: number;
   inProgressNow: boolean;
 }
 
@@ -21,7 +22,19 @@ const Tasks = ({ initialTodos }: TasksProps) => {
   const [todos, setTodos] = useState<Todo[]>(initialTodos);
   const [selectedTodoId, setSelectedTodoId] = useState<string>();
 
+  const [addNewTaskComponentActive, setAddNewTaskComponentActive] =
+    useState(false);
+
   const selectedTodo = todos.find((todo) => todo.id === selectedTodoId);
+
+  const handleAddNewTaskComponent = () => {
+    console.log("handleAddNewTaskComponent", addNewTaskComponentActive);
+    setAddNewTaskComponentActive((prevState) => !prevState);
+  };
+
+  const handleAddNewTask = (task: Todo) => {
+    setTodos((prevTodos) => [...prevTodos, task]);
+  };
   return (
     <div className="containerNarrow">
       <h2 className="title">Tasks</h2>
@@ -39,7 +52,9 @@ const Tasks = ({ initialTodos }: TasksProps) => {
               <p className="taskName">{todo.name}</p>
             </div>
             <div className="taskDetails">
-              <p>1/4</p>
+              <p>
+                {todo.pomodorosDone}/{todo.pomodoroAmount}
+              </p>
               <button className="button dotsIcon">
                 <FontAwesomeIcon icon={faEllipsisVertical} />
               </button>
@@ -47,11 +62,20 @@ const Tasks = ({ initialTodos }: TasksProps) => {
           </li>
         ))}
       </ul>
-      <button className="button is-fullwidth button--newTask">
-        <FontAwesomeIcon icon={faCirclePlus} className="taskIcon" />
-        Add new task
-      </button>
-      <NewTask />
+      {addNewTaskComponentActive ? (
+        <NewTask
+          setInactive={handleAddNewTaskComponent}
+          addNewTask={handleAddNewTask}
+        />
+      ) : (
+        <button
+          className="button is-fullwidth button--newTask"
+          onClick={handleAddNewTaskComponent}
+        >
+          <FontAwesomeIcon icon={faCirclePlus} className="taskIcon" />
+          Add new task
+        </button>
+      )}
     </div>
   );
 };

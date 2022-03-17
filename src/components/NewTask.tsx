@@ -3,9 +3,23 @@ import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
-import "./NewTask.css";
+import { v4 as uuidv4 } from "uuid";
 
-const NewTask = () => {
+import "./NewTask.css";
+interface NewTaskProps {
+  setInactive: () => void;
+  addNewTask: (task: {
+    id: string;
+    name: string;
+    pomodoroAmount: number;
+    pomodorosDone: 0;
+    isDone: false;
+    inProgressNow: false;
+  }) => void;
+}
+const NewTask = (props: NewTaskProps) => {
+  const [task, setTask] = useState("");
+
   const [count, setCount] = useState(1);
   const maxCount = 10;
   const minCount = 1;
@@ -28,14 +42,31 @@ const NewTask = () => {
     }
   };
 
+  const handleTaskName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTask(e.target.value);
+  };
+
+  const handleAddNewTask = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    props.addNewTask({
+      id: uuidv4(),
+      name: task,
+      pomodoroAmount: count,
+      pomodorosDone: 0,
+      inProgressNow: false,
+      isDone: false,
+    });
+  };
   return (
     <div className="containerNarrow box modal-card addTaskContainer">
-      <form>
+      <form onSubmit={handleAddNewTask}>
         <div className="modal-card-body taskQuestion">
           <input
             className="input is-medium input--noBorder "
             placeholder="What are your working on?"
             autoFocus
+            value={task}
+            onChange={handleTaskName}
           ></input>
         </div>
 
@@ -71,7 +102,13 @@ const NewTask = () => {
           </div>
         </div>
         <div className="modal-card-foot">
-          <button className="button button--cancel">Cancel</button>
+          <button
+            type="button"
+            className="button button--cancel"
+            onClick={props.setInactive}
+          >
+            Cancel
+          </button>
           <button type="submit" className="button button--save">
             Save
           </button>
