@@ -18,7 +18,7 @@ interface NewTaskProps {
   }) => void;
 }
 const NewTask = (props: NewTaskProps) => {
-  const [task, setTask] = useState("");
+  const [task, setTask] = useState<string>("");
 
   const [count, setCount] = useState(1);
   const maxCount = 10;
@@ -46,6 +46,16 @@ const NewTask = (props: NewTaskProps) => {
     setTask(e.target.value);
   };
 
+  const handleFormReset = () => {
+    setCount(1);
+    setTask("");
+  };
+
+  const handleCloseComponent = () => {
+    handleFormReset();
+    props.setInactive();
+  };
+
   const handleAddNewTask = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     props.addNewTask({
@@ -56,7 +66,9 @@ const NewTask = (props: NewTaskProps) => {
       inProgressNow: false,
       isDone: false,
     });
+    handleCloseComponent();
   };
+
   return (
     <div className="containerNarrow box modal-card addTaskContainer">
       <form onSubmit={handleAddNewTask}>
@@ -105,11 +117,15 @@ const NewTask = (props: NewTaskProps) => {
           <button
             type="button"
             className="button button--cancel"
-            onClick={props.setInactive}
+            onClick={handleCloseComponent}
           >
             Cancel
           </button>
-          <button type="submit" className="button button--save">
+          <button
+            type="submit"
+            className="button button--save"
+            disabled={task.trim() === ""}
+          >
             Save
           </button>
         </div>
