@@ -5,11 +5,20 @@ import Timer from "./components/Timer";
 import Header from "./components/Header";
 import Settings from "./components/Settings";
 import Tasks from "./components/Tasks";
+import Info from "./components/Info";
 
 enum ModeType {
   POMODORO = "pomodoro",
   SHORT_BREAK = "short_break",
   LONG_BREAK = "long_break",
+}
+
+interface Todo {
+  id: string;
+  name: string;
+  pomodoroAmount: number;
+  pomodorosDone: number;
+  isDone: boolean;
 }
 
 function App() {
@@ -33,6 +42,7 @@ function App() {
 
   const [donePomodoros, setDonePomodoros] = useState<number>(0);
 
+  const [selectedTask, setSelectedTask] = useState<Todo | null>(null);
   const handleDonePomodoro = () => {
     setDonePomodoros((prevPomodoros) => prevPomodoros + 1);
     console.log("pomodoro done!!!");
@@ -72,7 +82,11 @@ function App() {
           }));
         }}
       />
-      <Tasks donePomodoros={donePomodoros} />
+      <Info selectedTask={selectedTask} />
+      <Tasks
+        donePomodoros={donePomodoros}
+        setSelectedTask={(task) => setSelectedTask(task)}
+      />
     </div>
   );
 }

@@ -164,12 +164,6 @@ const Timer = (props: TimerProps) => {
           </button>
         </div>
       </div>
-      <div className="timer info box content">
-        <p>
-          Pomodoros done: {props.donePomodoros}
-          {props.donePomodoros === 0 && ". Focus with first Pomodoro!"}
-        </p>
-      </div>
       <Modal
         isActive={isModalActive}
         setInactive={() => setIsModalActive(false)}

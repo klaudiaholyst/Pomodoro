@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+
 import NewTask from "./NewTask";
 
 interface Todo {
@@ -16,6 +17,7 @@ interface Todo {
 
 interface TasksProps {
   donePomodoros: number;
+  setSelectedTask: (task: Todo) => void;
 }
 
 const Tasks = (props: TasksProps) => {
@@ -54,6 +56,10 @@ const Tasks = (props: TasksProps) => {
     setTodos((prevTodos) => [...prevTodos, task]);
   };
 
+  const handleSelectTask = (id: string) => {
+    setSelectedTodoId(id);
+    props.setSelectedTask(todos.find((task) => task.id === id)!);
+  };
   const handleSetTaskDone = (id: string) => {
     console.log(id);
     const newTasks = [...todos];
@@ -83,7 +89,7 @@ const Tasks = (props: TasksProps) => {
             className={`box is-fullwidth li ${
               todo.id === selectedTodoId && "active"
             }`}
-            onClick={() => setSelectedTodoId(todo.id)}
+            onClick={() => handleSelectTask(todo.id)}
           >
             <div className="taskDetails">
               <FontAwesomeIcon
