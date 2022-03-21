@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import Settings from "./components/Settings";
 import Tasks from "./components/Tasks";
 import Info from "./components/Info";
+import Footer from "./components/Footer";
 
 enum ModeType {
   POMODORO = "pomodoro",
@@ -87,6 +88,7 @@ function App() {
         donePomodoros={donePomodoros}
         setSelectedTask={(task) => setSelectedTask(task)}
       />
+      <Footer />
     </div>
   );
 }
