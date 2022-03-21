@@ -31,24 +31,13 @@ function App() {
   const [color, setColor] = useState("red");
   const [settingsActive, setSettingsActive] = useState(false);
 
-  const [tasks, setTasks] = useState([
-    {
-      id: "abc",
-      name: "Prepare for Math exam",
-      pomodoroAmount: 4,
-      pomodorosDone: 2,
-      isDone: false,
-      inProgressNow: true,
-    },
-    {
-      id: "abcde",
-      name: "Prepare for Math exam on Wednesday",
-      pomodoroAmount: 3,
-      pomodorosDone: 0,
-      isDone: false,
-      inProgressNow: false,
-    },
-  ]);
+  const [donePomodoros, setDonePomodoros] = useState<number>(0);
+
+  const handleDonePomodoro = () => {
+    setDonePomodoros((prevPomodoros) => prevPomodoros + 1);
+    console.log("pomodoro done!!!");
+  };
+
   return (
     <div className={`App ${color}`}>
       <Header
@@ -59,6 +48,8 @@ function App() {
         pomodoro={pomodoro}
         shortBreak={shortBreak}
         longBreak={longBreak}
+        donePomodoros={donePomodoros}
+        setPomodoroDone={() => handleDonePomodoro()}
       />
       <Settings
         settingsActive={settingsActive}
@@ -81,7 +72,7 @@ function App() {
           }));
         }}
       />
-      <Tasks initialTodos={tasks} />
+      <Tasks donePomodoros={donePomodoros} />
     </div>
   );
 }

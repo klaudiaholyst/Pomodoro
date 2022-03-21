@@ -19,6 +19,8 @@ interface TimerProps {
   pomodoro: ModeInterface;
   shortBreak: ModeInterface;
   longBreak: ModeInterface;
+  setPomodoroDone: () => void;
+  donePomodoros: number;
 }
 
 const Timer = (props: TimerProps) => {
@@ -26,7 +28,6 @@ const Timer = (props: TimerProps) => {
   const [seconds, setSeconds] = useState<number>(0);
   const [isCounting, setIsCounting] = useState(false);
   const [mode, setMode] = useState(props.pomodoro);
-  const [donePomodoros, setDonePomodoros] = useState<number>(0);
 
   const [sound] = useState(new Audio("/clickSound.wav"));
   const [playing, setPlaying] = useState(false);
@@ -85,8 +86,8 @@ const Timer = (props: TimerProps) => {
           ) {
             handleSwitchMode(props.pomodoro);
           } else if (mode.type === ModeType.POMODORO) {
-            setDonePomodoros((currDonePomodoros) => currDonePomodoros + 1);
-            if ((donePomodoros + 1) % 4 === 0) {
+            props.setPomodoroDone();
+            if ((props.donePomodoros + 1) % 4 === 0) {
               handleSwitchMode(props.longBreak);
             } else {
               handleSwitchMode(props.shortBreak);
@@ -165,8 +166,8 @@ const Timer = (props: TimerProps) => {
       </div>
       <div className="timer info box content">
         <p>
-          Pomodoros done: {donePomodoros}
-          {donePomodoros === 0 && ". Focus with first Pomodoro!"}
+          Pomodoros done: {props.donePomodoros}
+          {props.donePomodoros === 0 && ". Focus with first Pomodoro!"}
         </p>
       </div>
       <Modal
