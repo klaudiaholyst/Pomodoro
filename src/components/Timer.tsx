@@ -20,7 +20,9 @@ const Timer = (props: TimerProps) => {
   const [isCounting, setIsCounting] = useState(false);
   const [mode, setMode] = useState(props.pomodoro);
 
-  const [sound] = useState(new Audio("/clickSound.wav"));
+  const [sound] = useState(
+    new Audio(`${process.env.PUBLIC_URL}/clickSound.wav`)
+  );
   const [playing, setPlaying] = useState(false);
 
   const [isModalActive, setIsModalActive] = useState(false);
