@@ -5,7 +5,8 @@ import { useState } from "react";
 
 import { v4 as uuidv4 } from "uuid";
 
-import "./NewTask.css";
+import "./NewTaskEditTask.css";
+
 interface NewTaskProps {
   setInactive: () => void;
   addNewTask: (task: {

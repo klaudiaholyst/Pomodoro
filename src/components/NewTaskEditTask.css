@@ -18,7 +18,10 @@
   margin-right: 5px;
   background-color: #c8c8c8c9;
 }
-
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
 .button--arrow {
   margin-left: 5px;
 }

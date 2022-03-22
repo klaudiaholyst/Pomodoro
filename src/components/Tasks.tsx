@@ -6,6 +6,7 @@ import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 
 import NewTask from "./NewTask";
+import EditTask from "./EditTask";
 
 interface Todo {
   id: string;
@@ -48,12 +49,30 @@ const Tasks = (props: TasksProps) => {
   const [addNewTaskComponentActive, setAddNewTaskComponentActive] =
     useState(false);
 
+  const [editingTaskId, setEditingTaskId] = useState<string>("");
+
+  const handleEditTaskComponent = (id: string) => {
+    setEditingTaskId(id);
+  };
+
+  const handleEditTask = (task: Todo) => {
+    setTodos((prevState) => {
+      const newTodos = [...prevState];
+      const index = newTodos.findIndex((item) => item.id === task.id);
+      newTodos[index] = task;
+      return newTodos;
+    });
+  };
   const handleAddNewTaskComponent = () => {
     setAddNewTaskComponentActive((prevState) => !prevState);
   };
 
   const handleAddNewTask = (task: Todo) => {
     setTodos((prevTodos) => [...prevTodos, task]);
+  };
+
+  const handleDeleteTask = (id: string) => {
+    setTodos((prevState) => [...prevState].filter((item) => item.id !== id));
   };
 
   const handleSelectTask = (id: string) => {
@@ -83,37 +102,53 @@ const Tasks = (props: TasksProps) => {
     <div className="containerNarrow">
       <h2 className="title">Tasks</h2>
       <ul className="ul">
-        {todos.map((todo) => (
-          <li
-            key={todo.id}
-            className={`box is-fullwidth li ${
-              todo.id === selectedTodoId && "active"
-            }`}
-            onClick={() => handleSelectTask(todo.id)}
-          >
-            <div className="taskDetails">
-              <FontAwesomeIcon
-                icon={faCircleCheck}
-                className={`taskIcon ${todo.isDone && "taskIcon--isDone"}`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleSetTaskDone(todo.id);
-                }}
-              />
-              <p className={`taskName ${todo.isDone && "taskName--isDone"}`}>
-                {todo.name}
-              </p>
-            </div>
-            <div className="taskDetails">
-              <p>
-                {todo.pomodorosDone}/{todo.pomodoroAmount}
-              </p>
-              <button className="button dotsIcon">
-                <FontAwesomeIcon icon={faEllipsisVertical} />
-              </button>
-            </div>
-          </li>
-        ))}
+        {todos.map((todo) =>
+          editingTaskId === todo.id ? (
+            <EditTask
+              key={todo.id}
+              task={todo}
+              setInactive={() => setEditingTaskId("")}
+              editTask={(task) => handleEditTask(task)}
+              deleteTask={(id) => handleDeleteTask(id)}
+            />
+          ) : (
+            <li
+              key={todo.id}
+              className={`box is-fullwidth li ${
+                todo.id === selectedTodoId && "active"
+              }`}
+              onClick={() => handleSelectTask(todo.id)}
+            >
+              <div className="taskDetails">
+                <FontAwesomeIcon
+                  icon={faCircleCheck}
+                  className={`taskIcon ${todo.isDone && "taskIcon--isDone"}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleSetTaskDone(todo.id);
+                  }}
+                />
+                <p className={`taskName ${todo.isDone && "taskName--isDone"}`}>
+                  {todo.name}
+                </p>
+              </div>
+              <div className="taskDetails">
+                <p>
+                  {todo.pomodorosDone}/{todo.pomodoroAmount}
+                </p>
+                <button
+                  className="button dotsIcon"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleEditTaskComponent(todo.id);
+                  }}
+                >
+                  <FontAwesomeIcon icon={faEllipsisVertical} />
+                </button>
+              </div>
+            </li>
+          )
+        )}
       </ul>
       {addNewTaskComponentActive ? (
         <NewTask
