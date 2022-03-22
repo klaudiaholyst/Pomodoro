@@ -47,6 +47,8 @@ const Tasks = (props: TasksProps) => {
 
   const [selectedTodoId, setSelectedTodoId] = useState<string>();
 
+  const selectedTodo = todos.find((task) => task.id === selectedTodoId);
+
   const [addNewTaskComponentActive, setAddNewTaskComponentActive] =
     useState(false);
 
@@ -80,7 +82,6 @@ const Tasks = (props: TasksProps) => {
 
   const handleSelectTask = (id: string) => {
     setSelectedTodoId(id);
-    props.setSelectedTask(todos.find((task) => task.id === id)!);
   };
 
   const handleSetTaskDone = (id: string) => {
@@ -110,6 +111,10 @@ const Tasks = (props: TasksProps) => {
       return newTasks;
     });
   }, [props.donePomodoros]);
+
+  useEffect(() => {
+    props.setSelectedTask(selectedTodo!);
+  }, [selectedTodo]);
 
   return (
     <div className="containerNarrow">
