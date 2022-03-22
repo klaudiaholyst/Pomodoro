@@ -1,26 +1,16 @@
 import { useState } from "react";
+
+import { ModeType, Todo } from "./types/types";
+
 import "./App.css";
 import "bulma/css/bulma.min.css";
+
 import Timer from "./components/Timer";
 import Header from "./components/Header";
 import Settings from "./components/Settings";
 import Tasks from "./components/Tasks";
 import Info from "./components/Info";
 import Footer from "./components/Footer";
-
-enum ModeType {
-  POMODORO = "pomodoro",
-  SHORT_BREAK = "short_break",
-  LONG_BREAK = "long_break",
-}
-
-interface Todo {
-  id: string;
-  name: string;
-  pomodoroAmount: number;
-  pomodorosDone: number;
-  isDone: boolean;
-}
 
 function App() {
   const [pomodoro, setPomodoro] = useState({
@@ -44,6 +34,7 @@ function App() {
   const [donePomodoros, setDonePomodoros] = useState<number>(0);
 
   const [selectedTask, setSelectedTask] = useState<Todo | null>(null);
+
   const handleDonePomodoro = () => {
     setDonePomodoros((prevPomodoros) => prevPomodoros + 1);
   };

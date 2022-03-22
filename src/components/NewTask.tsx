@@ -1,22 +1,18 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
-import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
 import { v4 as uuidv4 } from "uuid";
 
+import { Todo } from "../types/types";
+
 import "./NewTaskEditTask.css";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
+import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 
 interface NewTaskProps {
   setInactive: () => void;
-  addNewTask: (task: {
-    id: string;
-    name: string;
-    pomodoroAmount: number;
-    pomodorosDone: 0;
-    isDone: false;
-    inProgressNow: false;
-  }) => void;
+  addNewTask: (task: Todo) => void;
 }
 const NewTask = (props: NewTaskProps) => {
   const [task, setTask] = useState<string>("");
@@ -64,7 +60,6 @@ const NewTask = (props: NewTaskProps) => {
       name: task,
       pomodoroAmount: count,
       pomodorosDone: 0,
-      inProgressNow: false,
       isDone: false,
     });
     handleCloseComponent();

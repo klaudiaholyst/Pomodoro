@@ -1,7 +1,8 @@
-import "./Header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
+
+import "./Header.css";
 
 interface HeaderProps {
   setSettingsActive: () => void;

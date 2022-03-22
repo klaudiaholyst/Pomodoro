@@ -1,20 +1,17 @@
+import { useState } from "react";
+
+import { Todo } from "../types/types";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
 
 import "./NewTaskEditTask.css";
-interface Task {
-  id: string;
-  name: string;
-  pomodoroAmount: number;
-  pomodorosDone: number;
-  isDone: boolean;
-}
+
 interface EditTaskProps {
-  task: Task;
+  task: Todo;
   setInactive: () => void;
-  editTask: (task: Task) => void;
+  editTask: (task: Todo) => void;
   deleteTask: (id: string) => void;
 }
 const EditTask = (props: EditTaskProps) => {

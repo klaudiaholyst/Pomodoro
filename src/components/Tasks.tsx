@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import "./Tasks.css";
+
+import { Todo } from "../types/types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
@@ -9,13 +10,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import NewTask from "./NewTask";
 import EditTask from "./EditTask";
 
-interface Todo {
-  id: string;
-  name: string;
-  pomodoroAmount: number;
-  pomodorosDone: number;
-  isDone: boolean;
-}
+import "./Tasks.css";
 
 interface TasksProps {
   donePomodoros: number;
@@ -29,21 +24,23 @@ const Tasks = (props: TasksProps) => {
       name: "Prepare for Math exam",
       pomodoroAmount: 4,
       pomodorosDone: 2,
-      isDone: false,
+      isDone: true,
     },
     {
       id: "abcde",
-      name: "Prepare for Math exam on Wednesday",
+      name: "Pomodoro App",
       pomodoroAmount: 3,
       pomodorosDone: 0,
-      isDone: true,
+      isDone: false,
+    },
+    {
+      id: "abcdefu",
+      name: "Make a cake",
+      pomodoroAmount: 2,
+      pomodorosDone: 0,
+      isDone: false,
     },
   ]);
-
-  const totalPomodorosDone = todos.reduce(
-    (acc, obj) => acc + obj.pomodorosDone,
-    0
-  );
 
   const [selectedTodoId, setSelectedTodoId] = useState<string>();
 

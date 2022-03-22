@@ -1,15 +1,10 @@
+import { Todo } from "../types/types";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 
 import "./Info.css";
 
-interface Todo {
-  id: string;
-  name: string;
-  pomodoroAmount: number;
-  pomodorosDone: number;
-  isDone: boolean;
-}
 interface InfoProps {
   selectedTask: Todo | null;
 }

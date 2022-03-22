@@ -1,18 +1,9 @@
 import { useEffect, useState } from "react";
+
+import { ModeType, ModeInterface } from "../types/types";
 import Modal from "./Modal";
+
 import "./Timer.css";
-
-enum ModeType {
-  POMODORO = "pomodoro",
-  SHORT_BREAK = "short_break",
-  LONG_BREAK = "long_break",
-}
-
-interface ModeInterface {
-  type: ModeType;
-  duration: number;
-  color: string;
-}
 
 interface TimerProps {
   modeColor: (color: string) => void;
