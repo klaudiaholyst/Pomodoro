@@ -46,7 +46,6 @@ function App() {
   const [selectedTask, setSelectedTask] = useState<Todo | null>(null);
   const handleDonePomodoro = () => {
     setDonePomodoros((prevPomodoros) => prevPomodoros + 1);
-    console.log("pomodoro done!!!");
   };
 
   return (

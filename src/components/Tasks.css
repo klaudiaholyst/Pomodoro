@@ -12,11 +12,22 @@
 .li.active {
   border-left: 6px solid rgb(61 46 46);
 }
+.topContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: solid 1px #ffd5d5;
+}
 .title {
   color: #ffffffba;
   letter-spacing: 3px;
   padding-top: 18px;
-  border-top: solid 1px #ffd5d5;
+}
+
+.titleIcon {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: none;
 }
 
 .taskDetails {
@@ -45,7 +56,9 @@
 .taskIcon--isDone:hover {
   color: #ff000062;
 }
-
+.trashIcon {
+  padding-right: 15px;
+}
 .dotsIcon {
   margin-left: 28px;
   color: #9e9e9e;
@@ -57,4 +70,7 @@
   background-color: #57575767;
   border: dashed #ffffff47 2px;
   color: rgb(255 255 255 / 77%);
+}
+.dropdown-item {
+  cursor: pointer;
 }

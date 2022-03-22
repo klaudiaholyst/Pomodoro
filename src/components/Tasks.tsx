@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 import NewTask from "./NewTask";
 import EditTask from "./EditTask";
@@ -49,6 +50,8 @@ const Tasks = (props: TasksProps) => {
   const [addNewTaskComponentActive, setAddNewTaskComponentActive] =
     useState(false);
 
+  const [isDropdownActive, setIsDropdownActive] = useState(false);
+
   const [editingTaskId, setEditingTaskId] = useState<string>("");
 
   const handleEditTaskComponent = (id: string) => {
@@ -79,12 +82,22 @@ const Tasks = (props: TasksProps) => {
     setSelectedTodoId(id);
     props.setSelectedTask(todos.find((task) => task.id === id)!);
   };
+
   const handleSetTaskDone = (id: string) => {
-    console.log(id);
     const newTasks = [...todos];
     const task = newTasks.find((task) => task.id === id)!;
     task.isDone = !task.isDone;
     setTodos(newTasks);
+  };
+
+  const handleClearAllTasks = () => {
+    setTodos([]);
+    setIsDropdownActive(false);
+  };
+
+  const handleClearDoneTasks = () => {
+    setTodos((prevState) => [...prevState].filter((task) => !task.isDone));
+    setIsDropdownActive(false);
   };
 
   useEffect(() => {
@@ -100,7 +113,35 @@ const Tasks = (props: TasksProps) => {
 
   return (
     <div className="containerNarrow">
-      <h2 className="title">Tasks</h2>
+      <div className="topContainer">
+        <h2 className="title">Tasks</h2>
+        <div className={`dropdown is-right ${isDropdownActive && "is-active"}`}>
+          <div className="dropdown-trigger">
+            <button
+              className="button titleIcon"
+              aria-haspopup="true"
+              aria-controls="dropdown-menu"
+              onClick={() => setIsDropdownActive((isActive) => !isActive)}
+            >
+              <FontAwesomeIcon icon={faEllipsisVertical} />
+            </button>
+          </div>
+          <div className="dropdown-menu" id="dropdown-menu" role="menu">
+            <div className="dropdown-content">
+              <p className="dropdown-item" onClick={handleClearDoneTasks}>
+                <FontAwesomeIcon icon={faTrash} className="trashIcon" />
+                Clear finished tasks
+              </p>
+              <hr className="dropdown-divider" />
+              <p className="dropdown-item" onClick={handleClearAllTasks}>
+                <FontAwesomeIcon icon={faTrash} className="trashIcon" />
+                Clear all tasks
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <ul className="ul">
         {todos.map((todo) =>
           editingTaskId === todo.id ? (
