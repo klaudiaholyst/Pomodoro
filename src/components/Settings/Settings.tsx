@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
-import useForm from "../hooks/useForm";
+import useForm from "../../hooks/useForm";
 
 import "./Settings.css";
 

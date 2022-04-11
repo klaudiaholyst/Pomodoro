@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-import { ModeType, ModeInterface } from "../types/types";
-import Modal from "./Modal";
+import { ModeType, ModeInterface } from "../../types/types";
+import Modal from "../Modal/Modal";
 
 import "./Timer.css";
 

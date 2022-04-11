@@ -1,17 +1,17 @@
-.App {
+.HomePage {
   min-height: 100vh;
   transition: background-color 1s linear;
 }
 
-.App.red {
+.HomePage.red {
   background-color: rgb(217, 85, 80);
 }
 
-.App.blue {
+.HomePage.blue {
   background-color: rgb(69, 124, 163);
 }
 
-.App.green {
+.HomePage.green {
   background-color: rgb(76, 145, 149);
 }
 

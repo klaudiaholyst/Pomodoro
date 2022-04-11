@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 
-import { Todo } from "../types/types";
+import { Todo } from "../../types/types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
-import NewTask from "./NewTask";
-import EditTask from "./EditTask";
+import NewTask from "../NewTaskEditTask/NewTask";
+import EditTask from "../NewTaskEditTask/EditTask";
 
 import "./Tasks.css";
 

@@ -1,4 +1,4 @@
-import { Todo } from "../types/types";
+import { Todo } from "../../types/types";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
