@@ -1,46 +1,52 @@
-# Getting Started with Create React App
+## Project Overview 🎉
+<h1> Pomodoro App </h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This app helps you get focused. 
 
-## Available Scripts
+- 3 modes ( pomodoro / short break / long break )
+- User can change the length of the modes in Settings
+- Changing theme according to current mode
+- After a pomodoro is done the app is changing mode to short break
+- After 4 sequences of pomodoros, mode is changed to long break
 
-In the project directory, you can run:
+</br>
+</br>
+List with tasks: 
 
-### `npm start`
+- Each task has estimated number of pomodoros + the number of pomodoros already done
+- User can edit or delete a task
+- Task can be marked as 'done' or 'in progress'
+- User can clear all tasks
+- User can clear all tasks marked as 'done'
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Only desktop version so far.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Design from https://pomofocus.io/
 
-### `npm test`
+## Technologies 🔧
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- React ( Hooks )
+- TypeScript
+- Bulma css (+ pure css)
 
-### `npm run build`
+## Screenshots 📺
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<p align="center">
+    <img src="https://raw.githubusercontent.com/klaudiaholyst/Pomodoro/developer/src/assets/screenshot.png" alt="Screenshot Pomodoro App">
+</p>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Installation 💾
+```bash
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+git clone https://github.com/klaudiaholyst/Pomodoro.git
 
-### `npm run eject`
+npm install
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+npm start
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+## Live 📍
+https://klaudiaholyst.github.io/Pomodoro/
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## License 🔱
+Open source license.

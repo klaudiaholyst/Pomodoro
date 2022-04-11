@@ -1,0 +1,49 @@
+.timer {
+  margin: 0 auto;
+  max-width: 480px;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.progressBar {
+  margin: 30px auto;
+  width: 100%;
+  height: 1px;
+  border: none;
+}
+.button--timer {
+  padding: 2px 12px;
+  background-color: transparent;
+  color: white;
+  border: none;
+}
+
+.button--timer.is-active {
+  background-color: rgba(0, 0, 0, 0.15);
+  color: white;
+  font-weight: bold;
+}
+.button--timer.start {
+  width: 200px;
+  background-color: white;
+  font-weight: bold;
+  font-size: 22px;
+  letter-spacing: 2.5px;
+}
+
+.button--timer.start.red {
+  color: rgb(217, 85, 80);
+}
+.button--timer.start.blue {
+  color: rgb(69, 124, 163);
+}
+.button--timer.start.green {
+  color: rgb(76, 145, 149);
+}
+.time {
+  font-size: 120px;
+  color: white;
+}

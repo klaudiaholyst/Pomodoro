@@ -1,0 +1,10 @@
+.modal-card {
+  max-width: 400px;
+}
+.formContainer {
+  display: flex;
+  justify-content: space-between;
+}
+.modal-card-foot {
+  justify-content: flex-end;
+}

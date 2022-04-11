@@ -1,0 +1,36 @@
+.addTaskContainer {
+  margin: 30px auto;
+  max-width: 100%;
+  padding: 0;
+}
+.taskQuestion {
+  padding-bottom: 0;
+}
+.input--noBorder,
+.input--noBorder:focus {
+  border: none;
+  box-shadow: none;
+  padding-left: 0;
+}
+
+.input--small {
+  width: initial;
+  margin-right: 5px;
+  background-color: #c8c8c8c9;
+}
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+.button--arrow {
+  margin-left: 5px;
+}
+
+.button--cancel {
+  background-color: transparent;
+  border: none;
+}
+
+.button--save {
+  background-color: #c8c8c8c9;
+}

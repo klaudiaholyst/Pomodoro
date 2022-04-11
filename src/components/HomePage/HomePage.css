@@ -1,0 +1,25 @@
+.HomePage {
+  min-height: 100vh;
+  transition: background-color 1s linear;
+}
+
+.HomePage.red {
+  background-color: rgb(217, 85, 80);
+}
+
+.HomePage.blue {
+  background-color: rgb(69, 124, 163);
+}
+
+.HomePage.green {
+  background-color: rgb(76, 145, 149);
+}
+
+.containerWide {
+  max-width: 620px;
+  margin: auto;
+}
+.containerNarrow {
+  max-width: 480px;
+  margin: auto;
+}
