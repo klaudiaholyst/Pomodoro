@@ -1,5 +1,5 @@
 ## Project Overview 🎉
-Pomodoro App
+<h1> Pomodoro App </h1>
 
 This app helps you get focused. 
 
@@ -9,7 +9,11 @@ This app helps you get focused.
 - After a pomodoro is done the app is changing mode to short break
 - After 4 sequences of pomodoros, mode is changed to long break
 
-- List with tasks: each task has estimated number of pomodoros + the number of pomodoros already done
+</br>
+</br>
+List with tasks: 
+
+- Each task has estimated number of pomodoros + the number of pomodoros already done
 - User can edit or delete a task
 - Task can be marked as 'done' or 'in progress'
 - User can clear all tasks
@@ -28,7 +32,6 @@ Design from https://pomofocus.io/
 ## Screenshots 📺
 
 <p align="center">
-  https://github.com/
     <img src="https://raw.githubusercontent.com/klaudiaholyst/Pomodoro/developer/src/assets/screenshot.png" alt="Screenshot Pomodoro App">
 </p>
 
